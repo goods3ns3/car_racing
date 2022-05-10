@@ -11,8 +11,10 @@ class Car(models.Model):
         verbose_name='Name', max_length=254, db_index=True
     )
     car_number = models.SlugField(
-        verbose_name='Registration number', max_length=254, db_index=True, unique=True
+        verbose_name='Registration number', max_length=254,
+        db_index=True, unique=True
     )
+    speed = models.IntegerField(verbose_name='Speed (km/h)')
 
     class Meta:
         app_label = 'journey'
@@ -20,28 +22,30 @@ class Car(models.Model):
         verbose_name_plural = 'Cars'
 
     def __str__(self):
-        return self.name
+        return f"{self.name} ({self.speed} km/h)"
 
 
 class Journey(models.Model):
     """User profile"""
 
-    user = models.OneToOneField(
-        User,
-        related_name='journey',
-        verbose_name="User",
-        null=True, blank=True,
-        on_delete=models.CASCADE
+    user_name = models.CharField(
+        verbose_name="Username", blank=True, max_length=254
+    )
+    session = models.CharField(
+        verbose_name="Session", blank=True, max_length=100
     )
     car = models.ForeignKey(
         Car, verbose_name="Car",
         on_delete=models.CASCADE,
-        related_name='journey'
+        related_name='journey',
+        blank=True, null=True
     )
     time_start = models.DateTimeField(
-        verbose_name="Time start", auto_now_add=True
+        verbose_name="Time start", blank=True, null=True
     )
-    time_finish = models.DateTimeField(verbose_name="Time finish")
+    time_finish = models.DateTimeField(
+        verbose_name="Time finish", blank=True, null=True
+    )
 
     class Meta:
         app_label = 'journey'
@@ -49,4 +53,4 @@ class Journey(models.Model):
         verbose_name_plural = "Journeys"
 
     def __str__(self):
-        return f"{self.user} {self.car} ({self.time_start}-{self.time_finish})"
+        return f"{self.user_name} {self.car} ({self.time_start}-{self.time_finish})"

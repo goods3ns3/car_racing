@@ -1,5 +1,7 @@
 {% extends "./base.html" %}
 
 {% block content %}
-passengers
+    {% for passenger in passengers %}
+        <div>{{ passenger.user_name }}</div>
+    {% endfor %}
 {% endblock content %}
