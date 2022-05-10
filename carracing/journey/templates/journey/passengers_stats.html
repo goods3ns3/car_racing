@@ -1,7 +1,18 @@
 {% extends "./base.html" %}
+{% load journey_tags %}
 
 {% block content %}
-    {% for passenger in passengers %}
-        <div>{{ passenger }}</div>
+    {% for user, journeys in journey_for_user.items %}
+        <div>
+            {% get_cars_and_distance journeys as car_distance %}
+            <div>{{ user }}:</div>
+            {% for car, distance in  car_distance.items %}
+                <div>
+                    Car - {{ car.name }},
+                    Distance - {{ distance }} km
+                </div>
+            {% endfor %}
+        </div>
+        <br>
     {% endfor %}
 {% endblock content %}

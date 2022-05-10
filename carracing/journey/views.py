@@ -57,3 +57,12 @@ class PassengerStatsView(ListView):
 
     def get_queryset(self):
         return User.objects.all()
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        users_list = [user for user in self.get_queryset()]
+        journey_for_user = {}
+        for i in users_list:
+            journey_for_user[i] = [j for j in Journey.objects.filter(user=i)]
+        ctx['journey_for_user'] = journey_for_user
+        return ctx
