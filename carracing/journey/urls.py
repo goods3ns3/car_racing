@@ -5,7 +5,7 @@ from .views import JourneyView, VehicleStatsView, PassengerStatsView, JourneySuc
 urlpatterns = [
     path('', JourneyView.as_view(), name='journey'),
     re_path(
-        r'journey-success/(?P<time_in_trip>\d+\.\d*)/$',
+        r'journey-success/(?P<travel_time>\d+\.\d*)/$',
         JourneySuccessView.as_view(),
         name='journey_success'
     ),

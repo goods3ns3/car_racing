@@ -1,7 +1,13 @@
 {% extends "./base.html" %}
 
 {% block content %}
-    {% for car in cars %}
-        <div>{{ car }}</div>
-    {% endfor %}
+    Total driven kilometers for each vehicle:
+    <table>
+        {% for car in cars %}
+            <tr>
+                <th>{{ car.car_number }}</th>
+                <td>{{ car.distance }} km</td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock content %}

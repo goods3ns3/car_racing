@@ -40,10 +40,13 @@ class Car(models.Model):
 
 
 class Journey(models.Model):
-    """User profile"""
+    """Journey model"""
 
-    user_name = models.CharField(
-        verbose_name="Username", blank=True, max_length=254
+    user = models.ForeignKey(
+        User, verbose_name="User",
+        on_delete=models.CASCADE,
+        related_name='journey',
+        blank=True, null=True
     )
     car = models.ForeignKey(
         Car, verbose_name="Car",
@@ -51,11 +54,11 @@ class Journey(models.Model):
         related_name='journey',
         blank=True, null=True
     )
-    time_start = models.DateTimeField(
-        verbose_name="Time start", blank=True, null=True
+    distance = models.FloatField(
+        verbose_name="Distance (km)", blank=True, null=True
     )
-    time_finish = models.DateTimeField(
-        verbose_name="Time finish", blank=True, null=True
+    travel_time = models.FloatField(
+        verbose_name="Travel time (h)", blank=True, null=True
     )
 
     class Meta:
@@ -64,4 +67,4 @@ class Journey(models.Model):
         verbose_name_plural = "Journeys"
 
     def __str__(self):
-        return f"{self.user_name} {self.car} ({self.time_start}-{self.time_finish})"
+        return f"{self.user} - {self.car} - {self.distance} - {self.travel_time}"
