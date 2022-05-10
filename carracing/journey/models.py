@@ -11,7 +11,7 @@ class Car(models.Model):
         verbose_name='Name', max_length=254, db_index=True
     )
     car_number = models.SlugField(
-        verbose_name='Slug', max_length=254, db_index=True, unique=True
+        verbose_name='Registration number', max_length=254, db_index=True, unique=True
     )
 
     class Meta:
