@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CarRace</title>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'journey' %}">Journey</a>
+        <a href="{% url 'vehicle_stats' %}">Vehicle stats</a>
+        <a href="{% url 'passenger_stats' %}">Passenger stats</a>
+    </nav>
+    {% block content %}
+    {% endblock content %}
+</body>
+</html>
