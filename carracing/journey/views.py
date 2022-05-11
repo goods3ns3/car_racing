@@ -19,7 +19,7 @@ class JourneyView(FormView):
             session=self.request.session.session_key
         )
         if created:
-            user.user_name = f"User-{user.id}"
+            user.user_name = f"Passenger-{user.id}"
             user.save(update_fields=["user_name"])
         self.obj.user = user
         self.obj.travel_time = self.obj.distance / self.obj.car.speed
